@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<head>
+  <style>
+    body {
+      background-color: transparent !important;
+      width: 1280px !important;
+      height: 720px !important;
+      margin: 8px !important;
+    }
+  </style>
+</head>
+<body>
+  <script src="/assets/js/wasm_exec.js"></script>
+  <script>
+  // Polyfill
+  if (!WebAssembly.instantiateStreaming) {
+    WebAssembly.instantiateStreaming = async (resp, importObject) => {
+      const source = await (await resp).arrayBuffer();
+      return await WebAssembly.instantiate(source, importObject);
+    };
+  }
+
+  const go = new Go();
+  WebAssembly.instantiateStreaming(fetch("pong.wasm"), go.importObject).then(result => {
+    go.run(result.instance);
+  });
+  </script>
+</body>
