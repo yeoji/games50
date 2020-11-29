@@ -1,5 +1,10 @@
 ## Games50 Site
 
+### Source
+
+- https://github.com/yeoji/games50-go
+- https://github.com/yeoji/games50-js
+
 ### Running Locally
 
 ```
